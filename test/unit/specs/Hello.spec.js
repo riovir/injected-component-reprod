@@ -8,4 +8,12 @@ describe('Hello.vue', () => {
     expect(vm.$el.querySelector('.hello h1').textContent)
       .to.equal('Welcome to Your Vue.js App')
   })
+
+  it('should render correct contents even when injecting', () => {
+    const HelloInjector = require('!!vue-loader?inject!@/components/Hello')
+    const Constructor = Vue.extend(HelloInjector({}))
+    const vm = new Constructor().$mount()
+    expect(vm.$el.querySelector('.hello h1').textContent)
+      .to.equal('Welcome to Your Vue.js App')
+  })
 })
